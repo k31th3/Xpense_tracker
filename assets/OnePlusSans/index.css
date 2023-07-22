@@ -1,0 +1,28 @@
+
+/* bold */
+@font-face 
+{
+  font-family: 'Oneplus sans bold';
+  font-style: normal;
+  font-display: swap;
+  src: url(OnePlusSans-Bold.ttf) format('woff2');
+}
+
+/* regular */
+@font-face 
+{
+  font-family: 'Oneplus sans regular';
+  font-style: normal;
+  font-display: swap;
+  src: url(OnePlusSans-Regular.ttf) format('woff2');
+}
+
+/* medium */
+@font-face 
+{
+  font-family: 'Oneplus sans medium';
+  font-style: normal;
+  font-display: swap;
+  src: url(OnePlusSans-Medium.ttf) format('woff2');
+}
+
