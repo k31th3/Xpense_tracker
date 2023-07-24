@@ -50,16 +50,12 @@
             return (object)$msm;
         }
 
-        public function required_userdata_active()
+        public function required_user_active()
         {
-            if (
-                    $_SESSION['active_status'] != 1 && 
-                    $_SESSION['user_id'] == 0
-                ) 
+            if (!isset($_SESSION['user_id'])) 
             {
                 redirect(base_url(''), 'refresh');
             } 
-
         }
     }
 

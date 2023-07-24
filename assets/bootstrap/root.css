@@ -1,0 +1,22 @@
+
+
+
+:root
+{
+	/* theme color */
+	--thick-rgba: #d2691e;
+	--solid-rgba: #8b4513;
+	--light-rgba: #d2691e6e;
+	--mantle-rgba: #d2691ec7;
+
+	/* border */
+    --bs-border-size: 2px;
+    
+	/* button */
+	--btn-choco-bg: #d2691e;
+	--btn-choco-bg-hover: #d2691ec7;
+
+	/* transition */
+	--bs-trans: 0.35s;
+
+}

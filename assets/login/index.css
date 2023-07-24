@@ -1,0 +1,49 @@
+
+@import '../OnePlusSans/index.css';
+
+body	
+{
+	--bs-body-font-family: 'Oneplus sans regular';
+	letter-spacing: 0.7px;
+}
+
+.container-fluid
+{
+	max-width: 1500px;
+}
+
+.card
+{
+	--bs-card-cap-padding-x: 2.5rem;
+	--bs-card-cap-padding-y: 2rem;
+	--bs-card-cap-bg: transparent;
+	--bs-card-spacer-x: 2.5rem;
+}
+
+/*
+	solid-rgba = #8b4513
+	thick-rgba = #d2691e
+*/
+
+.text-brown { color: #d2691e !important }
+
+
+.form-control:focus
+{
+	border: 0;
+	border-bottom: 2px solid #d2691e !important;
+}
+
+.form-control
+{ 
+	border: 0;
+	border-bottom: 2px solid #9E9E9E !important; 
+}
+
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover, 
+.form-control:-webkit-autofill:focus, 
+.form-control:-webkit-autofill:active
+{
+    transition: background-color 5000s ease-in-out 0s;
+}

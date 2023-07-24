@@ -1,4 +1,7 @@
 
+
+@import 'root.css';
+
 .form-control,
 .form-check-input
 {
@@ -8,7 +11,7 @@
 
 .form-control:focus
 {
-    border: 2px solid #0d6efd;
+    border: var(--bs-border-size) solid var(--thick-rgba);
     box-shadow: none !important;
     background-color: transparent;
 }
@@ -27,4 +30,10 @@
 .input-group-text
 {
     border: 2px solid #9E9E9E;
+}
+
+.form-floating>.form-control:focus~label
+{
+    color: var(--thick-rgba);
+    transition: var(--bs-trans);
 }

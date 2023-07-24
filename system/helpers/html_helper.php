@@ -335,6 +335,42 @@ if ( ! function_exists('link_tag'))
 
 // ------------------------------------------------------------------------
 
+if (! function_exists('script_tag')) {
+    /**
+     * Script
+     *
+     * Generates link to a JS file
+     *
+     * @param array|string $src       Script source or an array of attributes
+     * @param bool         $indexPage Should indexPage be added to the JS path
+     */
+    function script_tag($src = '', $indexPage = false)
+    {	
+    	$CI =& get_instance();
+        $script   = '<script ';
+        if (! is_array($src)) {
+            $src = ['src' => $src];
+        }
+
+        foreach ($src as $k => $v) {
+            if ($k === 'src' && ! preg_match('#^([a-z]+:)?//#i', $v)) {
+                if ($indexPage === true) {
+                    $script .= 'src="' . $CI->config->site_url($v) . '" ';
+                } else {
+                    $script .= 'src="' . $CI->config->base_url($v) . '" ';
+                }
+            } else {
+                // for attributes without values, like async or defer, use NULL.
+                $script .= $k . (null === $v ? ' ' : '="' . $v . '" ');
+            }
+        }
+
+        return rtrim($script) . '></script>';
+    }
+}
+
+// ------------------------------------------------------------------------
+
 if ( ! function_exists('meta'))
 {
 	/**
