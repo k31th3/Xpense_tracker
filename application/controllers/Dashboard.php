@@ -13,6 +13,10 @@
 
 		public function index()
 		{
-			$this->load->view('dashboard/index');
+			$data['page'] = 'Dashboard';
+
+			$this->parser->parse('layout/header', $data);
+			$this->load->view('dashboard/index')
+					   ->view('layout/footer');
 		}
 	}

@@ -56,4 +56,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 // add new route
 
-$route['log-out'] = 'user/log_out';
+$route['sign-out'] = 'user/sign_out';

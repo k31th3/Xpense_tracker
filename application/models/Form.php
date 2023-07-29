@@ -1,7 +1,7 @@
 <?php
     defined('BASEPATH') or exit('No direct script access allowed');
 
-class Form_model extends CI_Model
+class Form extends CI_Model
 {
     public function check_fields_list($fields)
     {

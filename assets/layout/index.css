@@ -1,0 +1,75 @@
+@import url("../OnePlusSans/index.css");
+@import url("../root.css");
+
+
+body
+{
+   --bs-body-font-family: 'Oneplus sans regular';
+   letter-spacing: 0.7px;
+}
+
+/*Loading*/
+
+.walking-man 
+{  
+   position: fixed;
+   top: 40%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   transform: -webkit-translate(-50%, -50%);
+   transform: -moz-translate(-50%, -50%);
+   transform: -ms-translate(-50%, -50%);
+}
+
+#body-container 
+{ 
+   display: none;
+   max-width: 1600px 
+}
+
+#side-bar { --bs-offcanvas-width: 300px }
+#side-bar,
+#main-bar
+{
+   overflow: auto;
+   height: 100vh;
+}
+
+#side-bar::-webkit-scrollbar,
+#main-bar::-webkit-scrollbar
+{
+   width: 8px !important;  
+}
+
+#side-bar::-webkit-scrollbar-thumb,
+#main-bar::-webkit-scrollbar-thumb
+{
+   background-color: transparent;
+}
+
+#main-bar { background-color: #9e9e9e1f }
+
+
+/* nav */
+
+.xt-nav li { width: 100% }
+
+.xt-nav li a 
+{
+   color: #000;
+   border-radius: 5px;
+}
+
+.xt-nav li :focus, 
+.xt-nav li:hover
+{
+   background-color: var(--mantle-rgba);
+   color: #fff !important;
+   transition: 0.20s;
+}
+
+.xt-nav li a > i
+{
+   color: var(--mantle-rgba);
+}
+

@@ -23,14 +23,19 @@ class User_model extends CI_Model
     public function login_auth($username)
     {
         $this->db->select("
-                user_id,
-                concat(lower(last_name),', ', lower(first_name),' ', lower(middle_name))as name,
-                role_id,
-                position_id,
-                username,
-                password
-            ")
-                 ->where('username', $this->db->escape_str($username));
+                    user_id,
+                    concat(lower(last_name),', ', lower(first_name),' ', lower(middle_name))as name,
+                    role_id,
+                    position_id,
+                    username,
+                    password
+                ")
+                 ->where(
+                    [
+                        'username' => $this->db->escape_str($username),
+                        'user_status' => 1
+                    ]
+                );
 
         $row = $this->db->get('tbl_user_info')
                         ->row();
