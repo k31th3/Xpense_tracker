@@ -9,26 +9,16 @@
 
             if (!$ajax) 
             {
-                die(FALSE);
+                redirect(base_url(''), 'refresh');
             }
         }   
 
-        public function ajax_method_with_session_required()
+        public function user_session_required()
         {
-            $ajax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest');
-
-            if (!$ajax) 
+            $msm["status"] = false;
+                       
+            if (isset($_SESSION['user_id'])) 
             {
-                $msm["message"] = "xmlhttprequest"; 
-                $msm["status"] = false;
-            }
-            else if (empty($_SESSION['user_id'])) 
-            {
-                $msm["message"] = "expired_session";
-                $msm["status"] = false;
-            }
-            else
-            {   
                 $msm["status"] = true;
             }
 

@@ -133,6 +133,7 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array(
+	'audit_trail_model' => 'audit_trail',
 	'Form' => 'form',
 	'User_model' => 'user',
 	'Page_model' => 'page'

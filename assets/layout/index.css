@@ -60,11 +60,10 @@ body
    border-radius: 5px;
 }
 
-.xt-nav li :focus, 
-.xt-nav li:hover
+.xt-nav li a:focus, 
+.xt-nav li a:hover
 {
-   background-color: var(--mantle-rgba);
-   color: #fff !important;
+   color: var(--mantle-rgba);
    transition: 0.20s;
 }
 

@@ -22,6 +22,14 @@
 		if (!empty($row)) 
 		{
 			// password_hash('Keith3soriano17', PASSWORD_BCRYPT)
+			$list = [
+					'user_id' => $row->user_id,
+	          		'audit_type' => 'Failed log-in',
+	          		'audit_details' => 'Wrong username or password',
+	          		'color' => 'text-danger',
+      				'bg_color' => ' bg-danger'
+	          	];
+
 			if (password_verify($field->password, $row->password)) 
 			{
 	          	$data = [
@@ -38,7 +46,17 @@
 
 	          	$this->session->sess_expiration = 300; // Expire in 5 minutes
 	          	$this->session->set_userdata($temp);  
+	        	
+	        	$list = [
+	        		'user_id' => $row->user_id,
+	        		'audit_type' => 'Log-in',
+	          		'audit_details' => 'Successfully log-in',
+	          		'color' => 'text-success',
+      				'bg_color' => ' bg-success'
+	        	];
 	        } 
+
+	        $this->audit_trail->add_audit_trail($list);
 		}
 	}
 

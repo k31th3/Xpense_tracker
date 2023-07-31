@@ -3,12 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{page}</title>
+	<title><?=$page?></title>
 
 	<?=link_tag('assets/website-logo.svg', 'icon', 'image/x-icon')?>
 	<?=link_tag('assets/bootstrap/index.css')?>
 	<?=link_tag('assets/bootstrap/form.css')?>
 	<?=link_tag('assets/bootstrap/button.css')?>
+	<?=script_tag('assets/bootstrap/popper.min.js')?>
 	<?=script_tag('assets/bootstrap/index.js')?>
 	<?=script_tag('assets/jquery.js')?>
 
@@ -25,16 +26,14 @@
 </head>
 
 	<body class="overflow-hidden">
+		<div id="body-container">
 		<?=script_tag('assets/toast/index.js')?>
 
-	<main class="container-fluid" id="body-container">
 		<div class="row">
-			
-			<div class="col-12 col-xxl-2 col-xl-3">
-				<div class="offcanvas-xl offcanvas-start " tabindex="-1" id="side-bar" aria-labelledby="offcanvas_label" data-bs-backdrop="static">
-				  	<div class="offcanvas-header">
-
-				  	<!-- title of canvas -->
+			<div class="offcanvas-xl offcanvas-start col-xl-2 col-lg-3" tabindex="-1"
+					aria-labelledby="offcanvas_label" id="side-bar" data-bs-backdrop="static">
+			  	<div class="offcanvas-header">
+				    <!-- title of canvas -->
 				    <?=heading("Title of canvas", 5, 'id="offcanvas_label"')?>
 
 				    <!-- offcanvas close button -->
@@ -47,17 +46,22 @@
 				    	);
 				    	echo form_button($attr);
 				    ?>
-
-				  	</div>
-
-				  	<div class="offcanvas-body d-block overflow-y-auto">
-
-				  		<?php $this->load->view('layout/side-bar') ?>
-				  
-				  	</div>
-				</div>
+			  	</div>
+			  	<div class="offcanvas-body d-block overflow-y-auto mx-2">
+			    	<?php $this->load->view('layout/side-bar') ?>
+			  	</div>
 			</div>
+			<main class="col-12 col-xl-10">
+				<?php 
+					$data["title"] = $page;
+					$this->load->view('layout/nav-bar', $data) 
+				?>
 
-			<div class="col" id="main-bar">
+				<div id="main-bar" class="vstack gap-4 pt-4 px-3 pb-5">
 
-				<div class="vstack gap-4 my-4">
+
+				
+
+	
+
+	

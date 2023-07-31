@@ -34,8 +34,7 @@ div.dataTables_filter label > input:focus
 
 div.bootstrap-table .table-header {
   height: 64px;
-  padding-left: 24px;
-  padding-right: 14px;
+  padding-right: 10px;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
@@ -136,6 +135,7 @@ div.bootstrap-table .table-footer .material-pagination {
   -webkit-display: flex;
   margin: 0;
   list-style-type: none;
+  margin-left: -10px;
 }
 
 div.bootstrap-table .table-header .material-pagination li:first-child,

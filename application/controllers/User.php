@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller 
 {
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
 	public function index()
 	{
 		if (isset($this->session->user_id)) 
@@ -21,14 +26,22 @@ class User extends CI_Controller
 
 	public function sign_out()
 	{
+		if (!isset($this->session->user_id)) 
+        {
+            redirect(base_url(''), 'refresh');
+        }
+
+		$list = [
+			'user_id' => $this->session->user_id,
+    		'audit_type' => 'Log-out',
+      		'audit_details' => 'Successfully log-out',
+      		'color' => 'text-success',
+      		'bg_color' => ' bg-success'
+	    ];
+		
+		$this->audit_trail->add_audit_trail($list);
+
 		$this->session->sess_destroy();
 		redirect(base_url(''), 'refresh');
-	}
-
-	public function as()
-	{
-		$row = $this->page->get_all_page();
-
-		echo json_encode($row);
 	}
 }

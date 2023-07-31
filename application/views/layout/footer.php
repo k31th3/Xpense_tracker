@@ -1,4 +1,5 @@
-
+			</div>
+		</main>
 	</body>
 </html>
 
@@ -17,11 +18,15 @@
 			<span>Please wait...</span>
 		</div>`);
 
-	 	$(".walking-man").fadeOut(3000, function()
+	 	$(".walking-man").fadeOut(2000, function()
  		{
  			$(this).remove();
  		});
 	 	
-	 	$("#body-container").fadeIn(4000);   
+	 	$("#body-container").fadeIn(5000);   
 	});
+
+	$(function () {
+        $("[data-bs-toggle='tooltip']").tooltip();
+    });
 </script>
