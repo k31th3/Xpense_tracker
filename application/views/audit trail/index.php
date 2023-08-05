@@ -2,8 +2,26 @@
 <?=link_tag("assets/audit trail/index.css")?>
 <?=link_tag("assets/dataTable/index.css")?>
 <?=link_tag("assets/date-range-picker/index.css")?>
+<?=script_tag("assets/chart/index.js")?>
 
-<div class="row">
+<div class="row gy-4">
+	
+	<div class="col-12">
+		
+		<div class="card">
+			<div class="card-body col-11 m-auto" style="min-height: 50vh">
+				<div class="row">
+					<div class="col-12 col-lg-4">
+						<div id="fetch_chart_accessibility"></div>
+					</div>
+					<div class="col-12 col-lg-8">
+						<div id="fetch_chart_time_check"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
 
 	<div class="col-12">
 		<div class="card">
@@ -39,7 +57,6 @@
 
 	table_audit_trail('<?=base_url("audit_trail/fetch_table_audit_trail")?>', loading);
 
-
 	re_fetch_table = function(start, end)
 	{
 		icon = $('i[id="rotate"]'); 
@@ -48,13 +65,29 @@
 		if (icon.attr("refresh") != false) 
 		{
 			table_audit_trail('<?=base_url("audit_trail/fetch_table_audit_trail")?>', loading, start, end);	
+			
+			chart_audit_trail({
+				'id': 'div[id="fetch_chart_accessibility"]',
+				'location': '<?=base_url("audit_trail/fetch_chart_accessibility")?>',
+				'start_date': start,
+				'end_date': end,
+				'loading': loading 
+			});
+
+			chart_audit_trail({
+				'id': 'div[id="fetch_chart_time_check"]',
+				'location': '<?=base_url("audit_trail/fetch_chart_time_check")?>',
+				'start_date': start,
+				'end_date': end,
+				'loading': loading 
+			});
 		}
 	}
 
 	$(function() 
 	{
-	    var start = moment().subtract(29, 'days');
-	    var end = moment();
+	    var start = moment().subtract(29, 'days'),
+	    	end = moment();
 	    
 	    function cb(start, end) 
 	    {

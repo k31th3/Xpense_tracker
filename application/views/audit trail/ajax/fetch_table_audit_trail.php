@@ -30,7 +30,7 @@
 			{ title: '<i class="ri-hashtag"></i> Audit no.', data: 'audit_no', orderable: false },
 			{ title: '<i class="ri-pages-line"></i> Type', data: 'audit_type', orderable: false },
 			{ title: '<i class="ri-article-line"></i> Details', data: 'audit_details', orderable: false },
-			{ title: '<i class="ri-calendar-todo-fill"></i> Date', data: 'date_created', orderable: false }
+			{ title: '<i class="ri-calendar-todo-fill"></i> Date', data: 'date_created' }
 		]  
 	});
 </script>

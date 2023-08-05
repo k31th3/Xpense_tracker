@@ -47,6 +47,27 @@
                 redirect(base_url(''), 'refresh');
             } 
         }
+
+        public function load_assets($list)
+        {   
+            $file = null;
+            foreach($list as $row)
+            {
+                $ext = pathinfo($row, PATHINFO_EXTENSION);
+                $url = "assets/{$row}";
+
+                if($ext == 'css')
+                {
+                    $file .= link_tag($url);
+                }
+                else
+                {
+                    $file .= script_tag($url);
+                }
+            }
+
+            echo $file; 
+        }
     }
 
 

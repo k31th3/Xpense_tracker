@@ -23,7 +23,8 @@ body
 
 #body-container 
 { 
-   display: none;
+/*   display: none;*/
+   margin: auto;
    max-width: 1600px 
 }
 
@@ -70,5 +71,27 @@ body
 .xt-nav li a > i
 {
    color: var(--mantle-rgba);
+}
+
+.btn-close
+{
+   background: none;
+   --bs-btn-close-focus-shadow: none;
+   font-size: xx-large;
+   display: contents;
+}
+
+.btn-close:after
+{   
+   font-family: 'remixicon' !important;
+   content: '\eb99';
+   font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.btn-close:hover:after
+{
+   color: var(--thick-rgba);
 }
 

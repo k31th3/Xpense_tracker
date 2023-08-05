@@ -35,6 +35,7 @@ class User extends CI_Controller
 			'user_id' => $this->session->user_id,
     		'audit_type' => 'Log-out',
       		'audit_details' => 'Successfully log-out',
+      		'audit_list' => 1,
       		'color' => 'text-success',
       		'bg_color' => ' bg-success'
 	    ];

@@ -26,6 +26,7 @@
 					'user_id' => $row->user_id,
 	          		'audit_type' => 'Failed log-in',
 	          		'audit_details' => 'Wrong username or password',
+	          		'audit_list' => 1,
 	          		'color' => 'text-danger',
       				'bg_color' => ' bg-danger'
 	          	];
@@ -51,6 +52,7 @@
 	        		'user_id' => $row->user_id,
 	        		'audit_type' => 'Log-in',
 	          		'audit_details' => 'Successfully log-in',
+	          		'audit_list' => 1,
 	          		'color' => 'text-success',
       				'bg_color' => ' bg-success'
 	        	];

@@ -1,7 +1,25 @@
   
-  <?php 
-       
+  <!-- logo -->
+
+  <div class="col-12 py-4 d-flex" style="max-height: 150px; height: 150px;">
+    <?php 
+
+      $r_setting =  $this->setting->get_logo_data();
       
+      $details = (object)json_decode(preg_replace('/[\r\n]/',' ', $r_setting->setting_details), true);
+
+      $attr = array(
+        'src' => $details->url,
+        'class' => 'img-fluid',
+        'width' => '100%',
+        'height' => '100%'
+      );
+
+      echo img($attr);
+    ?>
+  </div>
+
+  <?php 
       foreach($this->page->get_all_page() as $row)
       {
         $access_emp = explode(', ', $row->access_emp);
@@ -35,7 +53,7 @@
       echo ul($list, ['class' => 'nav xt-nav']);
   ?>
 
-  <hr class="my-3">
+  <!-- <hr class="my-3"> -->
 
   <ul class="nav flex-column mb-auto xt-nav">
     <li class="nav-item">

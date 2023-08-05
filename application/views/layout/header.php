@@ -24,7 +24,7 @@
 
 	<?=link_tag('assets/layout/index.css')?>
 </head>
-
+	
 	<body class="overflow-hidden">
 		<div id="body-container">
 		<?=script_tag('assets/toast/index.js')?>
