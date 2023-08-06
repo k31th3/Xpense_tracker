@@ -45,12 +45,12 @@
 				<span id="password-msg"></span>
 			</div>
 
-			<?php 
+			<?php 					 
 				$attr = array(
 					'type' => 'submit',
 					'content' => 'Submit',
 					'class' => 'btn btn-success mt-4 btn-choco',
-					'onclick' => 'login(event)'
+					'onclick' => "login(event)"
 				);
 
 				echo form_button($attr);
@@ -69,3 +69,59 @@
 	?>
 	</div>
 </div>
+
+<script>
+	login = function(e, loading) 
+	{
+		form = $('form[id="login-form"]');
+		btn = form.find('button[type="submit"]');
+
+		$.ajax(
+			{
+				url: form.attr('action'),
+				data: form.serialize(),
+				method: form.attr('method'),
+				dataType: 'json',
+				beforeSend: function()
+				{
+					btn.html(`<?php $data["construct"] = array('size' => 'spinner-border-sm');
+				$loading = $this->load->view('components/spinner', $data) ?>`)
+						.attr('disabled', true);
+				},
+				success:function(resp)
+				{
+					span = form.find('span');
+					span.html(null);
+					if (resp.status == null) 
+					{
+						span_msg(resp);		
+					}
+					else if(resp.status == false) 
+					{
+						new Toast({
+						    message: resp.message,
+						    type: 'danger'
+						});		
+					}
+					else
+					{
+						setTimeout(function()
+						{
+							window.location.href = resp.location;
+						}, 1400);
+					}
+				},
+				complete:function()
+				{
+					setTimeout(function(){
+					    btn.html('Submit')
+					   	   .removeAttr('disabled');
+					}, 1500);
+				}
+			}
+		);
+
+		e.preventDefault();
+	}
+</script>
+

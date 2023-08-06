@@ -38,7 +38,7 @@
 
 			</div>
 
-			<div class="card-body min-vh-100" id="table-audit-trail"></div>
+			<div class="card-body min-vh-100" id="fetch-audit-trail"></div>
 
 		</div>
 	</div>
@@ -49,13 +49,14 @@
 <?=script_tag("assets/audit trail/index.js")?>
 <?=script_tag("assets/date-range-picker/moment.min.js")?>
 <?=script_tag("assets/date-range-picker/index.js")?>
+<?=script_tag("assets/index.js")?>
 
 <script>
 	loading = `<div class='col-1 position-absolute top-50 start-50 translate-middle'> 
 					<?php $this->load->view("components/loading") ?> 
 				</div>`;
 
-	table_audit_trail('<?=base_url("audit_trail/fetch_table_audit_trail")?>', loading);
+	fetch_table($('div[id="fetch-audit-trail"]'), '<?=base_url("audit_trail/fetch_table_audit_trail")?>', loading);
 
 	re_fetch_table = function(start, end)
 	{
@@ -64,7 +65,7 @@
 		
 		if (icon.attr("refresh") != false) 
 		{
-			table_audit_trail('<?=base_url("audit_trail/fetch_table_audit_trail")?>', loading, start, end);	
+			fetch_table($('div[id="fetch-audit-trail"]'), '<?=base_url("audit_trail/fetch_table_audit_trail")?>', loading, start, end);	
 			
 			chart_audit_trail({
 				'id': 'div[id="fetch_chart_accessibility"]',
