@@ -23,7 +23,7 @@
 					   ->view('layout/footer');
 		}
 
-		public function fetch_add_product()
+		public function fetch_add_product_form()
 		{
 			$this->is_app->ajax_method_required();
 			
@@ -34,6 +34,18 @@
 				$data['options'] = $this->product->get_product_type_option();
 				
 				$this->load->view('product/form/add_product', $data);
+			}
+		}
+
+		public function fetch_ajax_add_product_form()
+		{
+			$this->is_app->ajax_method_required();
+			
+			$row = $this->is_app->user_session_required();
+
+			if($row->status) 
+			{
+				$this->load->view('product/ajax/fetch_add_product');	
 			}
 		}
 

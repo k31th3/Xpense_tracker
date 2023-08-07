@@ -19,7 +19,7 @@
 	
 	<div class="col-12">
 		<?php 
-			$url = base_url("product/fetch_add_product");
+			$url = base_url("product/fetch_add_product_form");
 			$title = '<i class=ri-add-circle-fill></i>';
 			$attr = [
 				'class' => 'btn btn-sm btn-success',
