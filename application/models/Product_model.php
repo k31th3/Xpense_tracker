@@ -21,6 +21,26 @@ class Product_model extends CI_Model
         return $data;
     }
 
+    public function get_product_type_by_id($product_type_id)
+    {
+        $this->db->select('*')
+                 ->where('product_type_id', $this->db->escape_str($product_type_id));
+
+        $row = $this->db->get('tbl_product_type')
+                           ->row(); 
+        return $row;
+    }
+
+    public function get_product_by_id($product_id)
+    {
+        $this->db->select('*')
+                 ->where('product_id', $this->db->escape_str($product_id));
+
+        $row = $this->db->get('tbl_product')
+                           ->row(); 
+        return $row;
+    }
+
     public function get_product_list()
     {
         $this->db->select('
@@ -45,11 +65,21 @@ class Product_model extends CI_Model
 
         if (!empty($result)) 
         {
+            $url = base_url('product/fetch_edit_product_form');
+            $icon = '<i class=ri-edit-2-fill></i>';
+
+            $count = 1;
             foreach($result as $row)
             {
                 $percentage = $row->commission / 100;
                 $data[] = array(
-                    'product_id' => $row->product_id,
+                    'product_id' => $count++,
+                    'action' => form_button([
+                        'product-id' => $row->product_id,
+                        'class' => 'btn border-0 text-primary p-0',
+                        'content' => $icon,
+                        'onclick' => "fetch_form('{$url}', '{$icon} Product', '', '{$row->product_id}')"
+                    ]),
                     'product_details' => $row->details,
                     'product_type' => $row->product_type,
                     'amount' => '₱ '.number_format($row->amount, 2),
@@ -73,5 +103,19 @@ class Product_model extends CI_Model
         );
 
         $this->db->insert("tbl_product", $list);
+    }
+
+    public function update_user_product_list($data, $product_id)
+    {
+        $list = array(
+            "product_details" => $data->description,
+            "product_type" => $this->db->escape_str($data->product_type),
+            "amount" => $this->db->escape_str($data->amount),
+            "commission" => $this->db->escape_str($data->commission)
+        );
+
+        $this->db->set($list)
+                 ->where('product_id', $this->db->escape_str($product_id))
+                 ->update('tbl_product');
     }
 }

@@ -2,6 +2,7 @@
 <?=link_tag("assets/dashboard/index.css")?>
 <?=script_tag("assets/chart/index.js")?>
 <?=script_tag("assets/dashboard/index.js")?>
+<?=script_tag("assets/index.js")?>
 
 <div class="row gy-4">
 	

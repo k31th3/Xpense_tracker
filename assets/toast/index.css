@@ -4,7 +4,7 @@
     max-width: 400px;
     transform: translateX(150%);
     transition: transform 1s;
-    z-index: 100;
+    z-index: 1040;
     top: 30px;
     right: 30px;
 }

@@ -1,10 +1,13 @@
 
-<?=form_open('product/fetch_ajax_add_product_form', ['class' => 'vstack gap-3 px-3 mb-5', 'autocomplete' => 'off', 'id' => 'fetch_form_add_process'])?>
+
+<?=link_tag('assets/jquery-confirm/index.css')?>
+
+<?=form_open('product/fetch_ajax_edit_product_form', ['class' => 'vstack gap-3 px-3 mb-5', 'autocomplete' => 'off', 'id' => 'fetch_form_edit_process', 'product-id' => $row->product_id])?>
 	
 	<div class="form-floating">
 		<?php 
 			$specify = 'product_type';
-			echo form_dropdown($specify, $options, '', "class='form-control' id='{$specify}'").
+			echo form_dropdown($specify, $options, $row->product_type, "class='form-control' id='{$specify}'").
 				 form_label(ucfirst(str_replace("_", " ",$specify))." <i class='ri-shopping-bag-3-fill'></i>");
  		?>
 		<span id="product_type-msg"></span>
@@ -17,7 +20,8 @@
 				'class' => 'form-control h-100',
 				'name' => $specify,
 				'id' => $specify,
-				'rows' => '3'
+				'rows' => '3',
+				'value' => $row->product_details
 			);
 
 			echo form_textarea($attr).form_label(ucwords($specify)." <i class='ri-article-fill'></i>");
@@ -33,7 +37,8 @@
 				$attr = array(
 					'class' => 'form-control',
 					'name' => $specify,
-					'id' => $specify
+					'id' => $specify,
+					'value' => $row->amount
 				);
 
 				echo form_input($attr).form_label(ucwords($specify)." <i class='ri-product-hunt-fill'></i>");
@@ -48,7 +53,8 @@
 				$attr = array(
 					'class' => 'form-control',
 					'name' => $specify,
-					'id' => $specify
+					'id' => $specify,
+					'value' => $row->commission
 				);
 
 				echo form_input($attr).form_label(ucwords($specify)." <i class='ri-water-percent-fill'></i>");
@@ -74,11 +80,12 @@
 <?=script_tag("assets/jquery.mask.js")?>
 <?=script_tag("assets/product/index.js")?>
 <?=script_tag('assets/toast/index.js')?>
+<?=script_tag('assets/jquery-confirm/index.js')?>
 
 <script>
 	fetch_form_add_process = function(e) 
 	{
-		form = $('form[id="fetch_form_add_process"]');
+		form = $('form[id="fetch_form_edit_process"]');
 		btn = form.find('button[type="submit"]');
 
 		$.ajax(
@@ -107,14 +114,37 @@
 					}
 					else
 					{
-						$('div[id="modal"]').modal('hide');
-
-						new Toast({
-						    message: resp.message,
-						    type: resp.type
+						$.confirm({
+							title: 'Confirmation!',
+						    content: 'Do you want update a product?',
+						    buttons: {
+						        confirm: function () 
+						        {
+						           	$.ajax(
+										{
+											url: form.attr('action'),
+											data: form.serialize()+"&product_id="+form.attr('product-id')+"&product_status=true",
+											method: form.attr('method'),
+											dataType: 'json',
+											success: function(resp)
+											{
+												$('div[id="modal"]').modal('hide');
+												new Toast({
+												    message: resp.message,
+												    type: resp.type
+												});
+												
+												fetch_table($('div[id="fetch_table_product"]'), `<?=base_url("product/fetch_table_product")?>`, loading_animation());
+											}
+										}
+									)
+						        },
+						        cancel: function () 
+						        {
+						            $.alert('Canceled!');
+						        }
+						    }
 						});
-						
-						fetch_table($('div[id="fetch_table_product"]'), `<?=base_url("product/fetch_table_product")?>`, loading_animation());
 					}
 				},
 				complete:function()

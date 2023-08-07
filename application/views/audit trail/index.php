@@ -1,8 +1,21 @@
 
-<?=link_tag("assets/audit trail/index.css")?>
-<?=link_tag("assets/dataTable/index.css")?>
-<?=link_tag("assets/date-range-picker/index.css")?>
-<?=script_tag("assets/chart/index.js")?>
+<?php 
+	$file = array(
+		'audit trail/index.css',
+		'dataTable/index.css',
+		'date-range-picker/index.css',
+		'chart/index.js',
+		'dataTable/index.js',
+		'dataTable/c-index.js',
+		'date-range-picker/moment.min.js',
+		'date-range-picker/index.js',
+		'index.js'
+	);
+
+	$this->is_app->load_assets($file);
+?>
+
+
 
 <div class="row gy-4">
 	
@@ -44,20 +57,8 @@
 	</div>
 </div>
 
-<?=script_tag("assets/dataTable/index.js")?>
-<?=script_tag("assets/dataTable/c-index.js")?>
-<?=script_tag("assets/audit trail/index.js")?>
-<?=script_tag("assets/date-range-picker/moment.min.js")?>
-<?=script_tag("assets/date-range-picker/index.js")?>
-<?=script_tag("assets/index.js")?>
 
 <script>
-	loading = `<div class='col-1 position-absolute top-50 start-50 translate-middle'> 
-					<?php $this->load->view("components/loading") ?> 
-				</div>`;
-
-	fetch_table($('div[id="fetch-audit-trail"]'), '<?=base_url("audit_trail/fetch_table_audit_trail")?>', loading);
-
 	re_fetch_table = function(start, end)
 	{
 		icon = $('i[id="rotate"]'); 
@@ -65,50 +66,23 @@
 		
 		if (icon.attr("refresh") != false) 
 		{
-			fetch_table($('div[id="fetch-audit-trail"]'), '<?=base_url("audit_trail/fetch_table_audit_trail")?>', loading, start, end);	
-			
-			chart_audit_trail({
-				'id': 'div[id="fetch_chart_accessibility"]',
+			fetch_table($('div[id="fetch-audit-trail"]'), '<?=base_url("audit_trail/fetch_table_audit_trail")?>', loading_animation(), start, end);	
+
+			fetch_chart($('div[id="fetch_chart_accessibility"]'), {
 				'location': '<?=base_url("audit_trail/fetch_chart_accessibility")?>',
 				'start_date': start,
 				'end_date': end,
-				'loading': loading 
+				'loading': loading_animation() 
 			});
 
-			chart_audit_trail({
-				'id': 'div[id="fetch_chart_time_check"]',
+			fetch_chart($('div[id="fetch_chart_time_check"]'), {
 				'location': '<?=base_url("audit_trail/fetch_chart_time_check")?>',
 				'start_date': start,
 				'end_date': end,
-				'loading': loading 
+				'loading': loading_animation() 
 			});
 		}
 	}
 
-	$(function() 
-	{
-	    var start = moment().subtract(29, 'days'),
-	    	end = moment();
-	    
-	    function cb(start, end) 
-	    {
-	        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-	        re_fetch_table(start.format('MMMM D, YYYY'), end.format('MMMM D, YYYY'));
-	    }
-
-	    $('#reportrange').daterangepicker({
-	        startDate: start,
-	        endDate: end,
-	        ranges: {
-	           'Today': [moment(), moment()],
-	           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-	           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-	           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-	           'This Month': [moment().startOf('month'), moment().endOf('month')],
-	           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-	        }
-	   	}, cb);
-
-	    cb(start, end);
-	});
+	run_moment_date();
 </script>

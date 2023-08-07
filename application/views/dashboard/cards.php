@@ -51,11 +51,9 @@
 		  l_earn_money_chart = $('div[id="earn-money-chart"]'),
 
 		  order_chart = $('canvas[id="order-chart"]'),
-		  l_order_chart = $('div[id="order-chart"]'),
-
-		  l_img = `<?php $this->load->view("components/loading")?>`;
+		  l_order_chart = $('div[id="order-chart"]');
     
-	l_sales_chart.html(l_img);
+	l_sales_chart.html(single_loading_animation());
 	l_sales_chart.fadeOut(4500);
 
 	sales_chart.fadeIn(4500, function(){
@@ -74,7 +72,7 @@
 		);
 	});
 
-	l_earn_money_chart.html(l_img);
+	l_earn_money_chart.html(single_loading_animation());
 	l_earn_money_chart.fadeOut(4500);
 	
 	earn_money_chart.fadeIn(4500, function(){
@@ -93,7 +91,7 @@
 		);
 	});
 
-	l_order_chart.html(l_img);
+	l_order_chart.html(single_loading_animation());
 	l_order_chart.fadeOut(4500);
 	
 	order_chart.fadeIn(4500, function(){

@@ -37,6 +37,23 @@
 			}
 		}
 
+		public function fetch_edit_product_form()
+		{
+			$this->is_app->ajax_method_required();
+			
+			$row = $this->is_app->user_session_required();
+
+			if($row->status) 
+			{
+				$data = array(
+					'options' => $this->product->get_product_type_option(),
+					'row' => $this->product->get_product_by_id($this->input->post('unique_id'))
+				);
+				
+				$this->load->view('product/form/edit_product', $data);
+			}
+		}
+
 		public function fetch_ajax_add_product_form()
 		{
 			$this->is_app->ajax_method_required();
@@ -46,6 +63,18 @@
 			if($row->status) 
 			{
 				$this->load->view('product/ajax/fetch_add_product');	
+			}
+		}
+
+		public function fetch_ajax_edit_product_form()
+		{
+			$this->is_app->ajax_method_required();
+			
+			$row = $this->is_app->user_session_required();
+
+			if($row->status) 
+			{
+				$this->load->view('product/ajax/fetch_edit_product');	
 			}
 		}
 

@@ -6,10 +6,17 @@
 	{
 		foreach($result as $row)
 		{
+			$r_details = json_decode($row->audit_details, true);
+			$o_details = (object)$r_details;
+
+			$details = (is_array($r_details) == 1)? 
+				  $o_details->title
+				: $row->audit_details;
+			
 			$data[] = array(
 				'audit_no' => $row->audit_id,
 				'audit_type' => "<div class='badge {$row->bg_color}'>{$row->audit_type}</div>",
-				'audit_details' => $row->audit_details,
+				'audit_details' => $details,
 				'date_created' => date('F d, Y h:ma', strtotime($row->date_created))
 			); 
 		}

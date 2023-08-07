@@ -1,21 +1,9 @@
-
-fetch_form_product = function(location, title)
-{
-	$.ajax({
-		url: location,
-		dataType: 'html',
-		success: function(response)
-		{
-			bs_modal(
-				{	
-					'title': title,
-					'body': response
-				}
-			);		
-		},
-		complete: function()
-		{
-			$('div[id="modal"]').modal('show');
-		}
+	
+	$('input[id="percentage"]').mask('000');
+	
+	$('select[id="product-type"] option[value=""]').attr({
+		'disabled':'disabled',
+		'hidden':'hidden'
 	});
-}
+
+	

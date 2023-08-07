@@ -24,7 +24,8 @@
 		data: <?=json_encode($result)?>,
 		columns:
 		[
-			{ title: '#', data: 'product_id' },
+			{ title: '#', data: 'product_id', orderable: false },
+			{ title: 'Action <i class="ri-pencil-ruler-2-fill"></i>', data: 'action', orderable: false },
 			{ title: 'Detail <i class="ri-article-fill"></i>', data: 'product_details', orderable: false },
 			{ title: 'Product type <i class="ri-shopping-bag-3-fill"></i>', data: 'product_type' },
 			{ title: 'Amount <i class="ri-product-hunt-fill"></i>', data: 'amount' },
