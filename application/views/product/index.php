@@ -1,14 +1,14 @@
 
 <?php 
 	$file = array(
-		'product/index.css',
 		'dataTable/index.css',
 		'date-range-picker/index.css',
 		'dataTable/index.js',
 		'dataTable/c-index.js',
 		'date-range-picker/moment.min.js',
 		'date-range-picker/index.js',
-		'index.js'
+		'index.js',
+		'product/index.css'
 	);
 
 	$this->is_app->load_assets($file);

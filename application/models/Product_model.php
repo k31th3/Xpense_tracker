@@ -27,7 +27,7 @@ class Product_model extends CI_Model
                  ->where('product_type_id', $this->db->escape_str($product_type_id));
 
         $row = $this->db->get('tbl_product_type')
-                           ->row(); 
+                        ->row(); 
         return $row;
     }
 
@@ -37,7 +37,7 @@ class Product_model extends CI_Model
                  ->where('product_id', $this->db->escape_str($product_id));
 
         $row = $this->db->get('tbl_product')
-                           ->row(); 
+                        ->row(); 
         return $row;
     }
 
@@ -84,7 +84,7 @@ class Product_model extends CI_Model
                     'product_type' => $row->product_type,
                     'amount' => '₱ '.number_format($row->amount, 2),
                     'commission' => '₱ '.number_format($percentage, 2),
-                    'date_created' => date('F d, Y', strtotime($row->date_created)) 
+                    'date_created' => date('M d, Y', strtotime($row->date_created)) 
                 );
             }
         }

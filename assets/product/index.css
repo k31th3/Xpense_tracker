@@ -3,3 +3,13 @@
 {
    color: var(--mantle-rgba)
 }
+
+table.dataTable.nowrap td 
+{
+   white-space: revert; 
+}
+div.bootstrap-table table tr td 
+{
+   line-height: 20px;
+   white-space: revert; 
+}

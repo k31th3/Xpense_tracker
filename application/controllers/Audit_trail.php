@@ -68,35 +68,18 @@
 			
 			if ($row->status)
 			{
-				$data = array(
-					'row' => $row,
-					'result' => $this->audit_trail->chart_time_check([
+				$date_range = [
 						'start' => $this->input->post('start'),
 						'end' => $this->input->post('end')
-					])
+					];
+				$data = array(
+					'row' => $row,
+					'log_in' => $this->audit_trail->chart_time_check($date_range, ["Log-in"]),
+					'log_out' => $this->audit_trail->chart_time_check($date_range, ["Log-out"]),
+					'failed_log_in' => $this->audit_trail->chart_time_check($date_range, ["Failed log-in"])
 				);
 				
 				$this->load->view('audit trail/ajax/fetch_chart_time_check', $data);
 			}	
-		}
-
-		public function sa()
-		{
-			$result = $this->audit_trail->chart_time_check(null);
-
-			foreach($result as $row)
-			{
-				$date = date('Y-m-d', strtotime($row->date_created));
-				$r_count[] = date('Y-m-d', strtotime($row->date_created)); 	
-
-				$data[$row->audit_type][$date] = array(
-					"x" => $date,
-					"y" => round(count($r_count) /2)
-				);
-			}
-
-			header('Content-type: text/json');
-
-			echo json_encode($data, JSON_PRETTY_PRINT);
 		}
 	}

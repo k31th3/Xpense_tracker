@@ -48,7 +48,6 @@
 	        		'user_id' => $this->session->user_id,
 	        		'audit_type' => 'Add product',
 	          		'audit_details' => 'Successfully add product',
-	          		'audit_list' => 1,
 	          		'color' => 'text-success',
       				'bg_color' => ' bg-success'
 	        	];

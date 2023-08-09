@@ -7,7 +7,7 @@ class Audit_trail_model extends CI_Model
     {
         $list = array(
             'user_id' => $data['user_id'],
-            'audit_type' => $data["audit_type"],
+            'audit_type' => $data['audit_type'],
             'audit_details' => $data["audit_details"],
             'color' => $data["color"],
             'bg_color' => $data["bg_color"],
@@ -42,10 +42,8 @@ class Audit_trail_model extends CI_Model
                     audit_type,    
                     count(audit_type) as count
                 ')
-                 ->where([
-                    'user_id' => $this->session->user_id,
-                    'audit_list' => 1
-                 ]);
+                 ->where('user_id', $this->session->user_id)
+                 ->where_in("audit_type", ["Log-in", "Log-out", "Failed log-in"]);
 
         if (!empty($data['start']) && !empty($data['end'])) 
         {
@@ -64,17 +62,15 @@ class Audit_trail_model extends CI_Model
         return $result;
     }
 
-    public function chart_time_check($data)
+    public function chart_time_check($data, $in)
     {
         $this->db->select('
                     audit_type,
                     date_created,
                     count(audit_type) as count
                 ')
-                 ->where([
-                    'user_id' => $this->session->user_id,
-                    'audit_list' => 1
-                 ]);
+                 ->where('user_id', $this->session->user_id)
+                 ->where_in("audit_type", $in);
 
         if (!empty($data['start']) && !empty($data['end'])) 
         {
@@ -85,11 +81,29 @@ class Audit_trail_model extends CI_Model
         }
 
         $this->db->order_by('date_created', 'desc')
-                 ->group_by("date_created");
+                 ->group_by('DATE(date_created)');
 
         $result = $this->db->get('tbl_audit')
                            ->result();
 
-        return $result;
+        $list[$data['start']] = array(
+            "x" => $data['start'],
+            "y" => 0 
+        );
+        
+        if (!empty($result)) 
+        {
+            foreach($result as $row)
+            {
+                $date = date('M d, Y', strtotime($row->date_created));
+
+                $list[$date] = array(
+                    "x" => $date,
+                    "y" => $row->count
+                );   
+            }
+        }
+
+        return $list;
     }    
 }

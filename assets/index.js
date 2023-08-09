@@ -136,3 +136,48 @@ run_moment_date = function()
 	    cb(start, end);
 	});	
 }
+
+truncate_row_dataTable = function(data, type, row, meta)
+{
+	api = new $.fn.dataTable.Api(meta.settings);
+    node = api.cell(meta.row, meta.col, {
+        order: 'index'
+    }).node();
+      
+    hasToggler = $(node).children().length > 0;
+
+    if (type === 'display' && !hasToggler && data.length > truncatedLength + 5) 
+    {
+        origDataMap.set(`${meta.row} - ${meta.col}`, data);
+        displayData = `<span> ${data.substr(0, truncatedLength)}... </span> 
+            <button class="btn btn-link p-0 text-decoration-none" data-state="trunc" 
+              onclick="showMoreOrLess(this, '${meta.row}', '${meta.col}')">more</button>`;
+        return displayData;
+    } 
+    else 
+    {
+        return data;
+    }	
+}
+
+showMoreOrLess = function(node, rowId, colId) 
+{
+  	state = $(node).attr('data-state');
+  	origData = origDataMap.get(`${rowId} - ${colId}`);
+  	cellNode = $(node).parent();
+  
+  	if (state === 'trunc') 
+  	{
+    	displayData = `<span>${origData}</span>
+    	<button class="btn btn-link p-0 text-decoration-none" data-state="full" 
+              onclick="showMoreOrLess(this, '${rowId}', '${colId}')">less</button>`;
+  	} 
+  	else 
+  	{
+    	displayData = `<span> ${origData.substr(0, truncatedLength)}... </span> 
+        <button class="btn btn-link p-0 text-decoration-none" data-state="trunc" 
+              onclick="showMoreOrLess(this, '${rowId}', '${colId}')">more</button>`;
+  	}
+
+  	cellNode.html(displayData);
+}

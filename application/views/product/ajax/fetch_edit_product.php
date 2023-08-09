@@ -57,7 +57,6 @@
 	          			'amount' => $field->amount,
 	          			'commission' => $field->commission
 	          		), JSON_PRETTY_PRINT),
-	          		'audit_list' => 1,
 	          		'color' => 'text-primary',
       				'bg_color' => ' bg-primary'
 	        	];

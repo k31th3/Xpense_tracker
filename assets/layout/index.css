@@ -71,6 +71,7 @@ body
 .xt-nav li a > i
 {
    color: var(--mantle-rgba);
+   font-size: x-large;
 }
 
 .btn-close
