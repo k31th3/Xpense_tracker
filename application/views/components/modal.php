@@ -19,7 +19,7 @@
     {
         modal = $('div[id="modal"]');
         modal.find('.modal-body').html(null);
-        modal.find('.modal-dialog').attr("class", "modal-dialog modal-dialog-scrollable");
+        modal.find('.modal-dialog').attr("class", "modal-dialog modal-dialog-centered modal-dialog-scrollable");
     });
 
     bs_modal = function(data)

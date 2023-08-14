@@ -71,16 +71,19 @@ class Product_model extends CI_Model
             $count = 1;
             foreach($result as $row)
             {
+                // $count++
                 $percentage = $row->commission / 100;
+                $p_details = stripslashes($row->details);
+                
                 $data[] = array(
-                    'product_id' => $count++,
+                    'product_id' => $row->product_id,
                     'action' => form_button([
                         'product-id' => $row->product_id,
                         'class' => 'btn border-0 text-primary p-0',
                         'content' => $icon,
                         'onclick' => "fetch_form('{$url}', '{$icon} Product', '', '{$row->product_id}')"
                     ]),
-                    'product_details' => $row->details,
+                    'product_details' => $p_details,
                     'product_type' => $row->product_type,
                     'amount' => '₱ '.number_format($row->amount, 2),
                     'commission' => '₱ '.number_format($percentage, 2),
@@ -117,5 +120,17 @@ class Product_model extends CI_Model
         $this->db->set($list)
                  ->where('product_id', $this->db->escape_str($product_id))
                  ->update('tbl_product');
+    }
+
+    public function get_product_where_in($data)
+    {
+        $this->db->select('*')
+                 ->where_in('product_id', $this->db->escape_str($data))
+                 ->order_by('date_created', 'asc');
+
+        $result = $this->db->get('tbl_product')
+                           ->result();
+
+        return $result;
     }
 }

@@ -10,6 +10,5 @@ table.dataTable.nowrap td
 }
 div.bootstrap-table table tr td 
 {
-   line-height: 20px;
    white-space: revert; 
 }

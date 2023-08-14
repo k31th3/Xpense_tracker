@@ -48,14 +48,14 @@
 
 				$list = [
 	        		'user_id' => $this->session->user_id,
-	        		'audit_type' => 'Update product',
+	        		'audit_type' => 'Product',
 	          		'audit_details' => json_encode(array(
-	          			'title' => 'Successfully update product',
+	          			'Title' => 'Update product',
 	          			'Date & Time' => date('F d, Y h:ma'),
-	          			'item_name' => $field->description,
-	          			'item_type' => $r_pt->product_type_name,
-	          			'amount' => $field->amount,
-	          			'commission' => $field->commission
+	          			'Item name' => $field->description,
+	          			'Item type' => $r_pt->product_type_name,
+	          			'Amount' => $field->amount,
+	          			'Commission' => ($field->commission / 100)
 	          		), JSON_PRETTY_PRINT),
 	          		'color' => 'text-primary',
       				'bg_color' => ' bg-primary'

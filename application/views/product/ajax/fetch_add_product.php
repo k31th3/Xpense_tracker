@@ -43,11 +43,19 @@
 		else
 		{
 			$this->product->add_user_product_list($field);
-
+			$r_pt = $this->product->get_product_type_by_id($field->product_type);
+			
 			$list = [
 	        		'user_id' => $this->session->user_id,
-	        		'audit_type' => 'Add product',
-	          		'audit_details' => 'Successfully add product',
+	        		'audit_type' => 'Product',
+	          		'audit_details' => json_encode(array(
+	          			'Title' => 'Add product',
+	          			'Date & Time' => date('F d, Y h:ma'),
+	          			'Item name' => $field->description,
+	          			'Item type' => $r_pt->product_type_name,
+	          			'Amount' => $field->amount,
+	          			'Commission' => ($field->commission / 100)
+	          		), JSON_PRETTY_PRINT),
 	          		'color' => 'text-success',
       				'bg_color' => ' bg-success'
 	        	];

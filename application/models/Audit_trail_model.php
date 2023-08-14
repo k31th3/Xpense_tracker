@@ -32,8 +32,41 @@ class Audit_trail_model extends CI_Model
         $this->db->order_by('date_created', 'desc');
         $result = $this->db->get('tbl_audit')
                            ->result();
+        $data = [];
+    
+        if (!empty($result)) 
+        {
+            foreach($result as $row)
+            {
+                $r_details = json_decode($row->audit_details, true);
+                $o_details = (object)$r_details;
 
-        return $result;
+                $details = $row->audit_details;
+                if (is_array($r_details) == 1) 
+                {   
+                    $title = array_keys($r_details);
+                    $item = array_values($r_details);
+
+                    $list = array_map(function($value, $key) 
+                                {
+                                    return "{$key}: {$value}";
+                                }, $item, $title);
+
+                    $details = "<ul class='list-unstyled'>
+                                    <li>".implode("</li><li>", $list)."</li>
+                                </ul>";
+                }
+
+                $data[] = array(
+                    'audit_no' => $row->audit_id,
+                    'audit_type' => "<div class='badge {$row->bg_color}'>{$row->audit_type}</div>",
+                    'audit_details' => $details,
+                    'date_created' => date('F d, Y h:ma', strtotime($row->date_created))
+                ); 
+            }
+        }
+
+        return $data;
     }
 
     public function count_chart_accessibility($data)

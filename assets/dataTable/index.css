@@ -10,6 +10,10 @@
   color: rgba(0, 0, 0, .84);
 }*/
 
+.table 
+{
+  --bs-table-hover-bg: rgb(0 0 0 / 3%);
+}
 div.dataTables_filter label 
 {
   width: 100%;
@@ -193,7 +197,7 @@ div.bootstrap-table .table-title {
 div.bootstrap-table table tr td {
   padding: 10px 0 10px 56px;
   height: 50px;
-  line-height: 50px;
+  line-height: 20px;
   font-size: 13px;
   color: rgba(0, 0, 0, 0.87);
   border-bottom: solid 1px #DDDDDD;

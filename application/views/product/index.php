@@ -5,6 +5,8 @@
 		'date-range-picker/index.css',
 		'dataTable/index.js',
 		'dataTable/c-index.js',
+		'dataTable/select-min.css',
+		'dataTable/select-min.js',
 		'date-range-picker/moment.min.js',
 		'date-range-picker/index.js',
 		'index.js',
@@ -13,6 +15,7 @@
 
 	$this->is_app->load_assets($file);
 ?>
+
 
 <div class="row gy-4">
 	
@@ -43,6 +46,7 @@
 				<i class="ri-restart-line rotate c-mantle fw-bold" data-bs-toggle="tooltip"  data-bs-title="Refresh audit table" data-bs-placement="top" data-bs-custom-class="tooltip" id="rotate" type="button" onclick="re_fetch_table()"></i>
 
 			</div>
+
 			<div class="card-body min-vh-100" id="fetch_table_product"></div>
 		</div>
 	</div>
