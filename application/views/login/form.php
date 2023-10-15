@@ -85,7 +85,7 @@
 				beforeSend: function()
 				{
 					btn.html(`<?php $data["construct"] = array('size' => 'spinner-border-sm');
-				$loading = $this->load->view('components/spinner', $data) ?>`)
+					$loading = $this->load->view('components/spinner', $data) ?>`)
 						.attr('disabled', true);
 				},
 				success:function(resp)
@@ -94,7 +94,11 @@
 					span.html(null);
 					if (resp.status == null) 
 					{
-						span_msg(resp);		
+						span_msg(resp);
+						setTimeout(function(){
+						    btn.html('Submit')
+						   	   .removeAttr('disabled');
+						}, 1500);		
 					}
 					else if(resp.status == false) 
 					{
@@ -102,21 +106,20 @@
 						    message: resp.message,
 						    type: 'danger'
 						});		
+
+						setTimeout(function(){
+						    btn.html('Submit')
+						   	   .removeAttr('disabled');
+						}, 1500);
 					}
 					else
 					{
+						btn.attr('disabled', true).html('Please wait...');
 						setTimeout(function()
 						{
 							window.location.href = resp.location;
 						}, 1400);
 					}
-				},
-				complete:function()
-				{
-					setTimeout(function(){
-					    btn.html('Submit')
-					   	   .removeAttr('disabled');
-					}, 1500);
 				}
 			}
 		);

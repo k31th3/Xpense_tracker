@@ -1,5 +1,3 @@
-
-
 line_chart_cards = function(row)
 {
 	// id, labels, data
@@ -72,3 +70,4 @@ line_chart_cards = function(row)
 	  	}
 	});
 } 
+

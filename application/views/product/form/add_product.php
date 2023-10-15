@@ -1,5 +1,9 @@
 
-<?=form_open('product/fetch_ajax_add_product_form', ['class' => 'vstack gap-3 px-3 mb-5', 'autocomplete' => 'off', 'id' => 'fetch_form_add_process'])?>
+<?php 
+	$attr = ['class' => 'vstack gap-3 px-3 mb-5', 'autocomplete' => 'off', 'id' => 'fetch_form_add_process'];
+?>
+
+<?=form_open('product/fetch_ajax_add_product_form', $attr)?>
 	
 	<div class="form-floating">
 		<?php 
@@ -71,8 +75,7 @@
 
 <?=form_close()?>
 
-<?=script_tag("assets/jquery.mask.js")?>
-<?=script_tag("assets/product/index.js")?>
+<?=script_tag('assets/product/index.js')?>
 <?=script_tag('assets/toast/index.js')?>
 
 <script>
@@ -90,7 +93,7 @@
 				beforeSend: function()
 				{
 					btn.html(`<?php $data["construct"] = array('size' => 'spinner-border-sm');
-					$loading = $this->load->view('components/spinner', $data) ?>`)
+						$this->load->view('components/spinner', $data) ?>`)
 						.attr('disabled', true);
 				},
 				success:function(resp)

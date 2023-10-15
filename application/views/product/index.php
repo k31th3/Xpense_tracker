@@ -9,6 +9,7 @@
 		'dataTable/select-min.js',
 		'date-range-picker/moment.min.js',
 		'date-range-picker/index.js',
+		'jquery.mask.js',
 		'index.js',
 		'product/index.css'
 	);
@@ -22,11 +23,10 @@
 	<div class="col-12">
 		<?php 
 			$url = base_url("product/fetch_add_product_form");
-			$title = '<i class=ri-add-circle-fill></i>';
 			$attr = [
-				'class' => 'btn btn-sm btn-success',
+				'class' => 'btn btn-sm btn-success btn-choco',
 				'content' => "<i class='ri-add-fill'></i>",
-				'onclick' => "fetch_form('{$url}', '{$title} Product')"
+				'onclick' => "fetch_form('{$url}', `<i class='ri-add-circle-fill c-mantle'></i> Product`)"
 			];
 			
 			echo form_button($attr);

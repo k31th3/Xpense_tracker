@@ -131,6 +131,60 @@ class Product_model extends CI_Model
         $result = $this->db->get('tbl_product')
                            ->result();
 
-        return $result;
+        $attr = array(
+            'class' => 'btn btn-sm btn-danger fw-bold',
+            'content' => "<i class='ri-close-line'></i>",
+            'onclick' => "remove_product_on_cart(this)"
+        );
+
+        $remove = form_button($attr);
+
+        $attr = array(
+            'class' => 'btn btn-sm fw-bold',
+            'content' => "<i class='ri-add-line'></i>",
+            'onclick' => "addition_quantity_product_on_cart(this)"
+        );
+
+        $addition = form_button($attr);
+
+        $attr = array(
+            'class' => 'btn btn-sm fw-bold',
+            'content' => "<i class='ri-subtract-line'></i>",
+            'onclick' => "decrement_quantity_product_on_cart(this)"
+        );
+
+        $subraction = form_button($attr);
+        $count = 1;
+        foreach($result as $row)
+        {
+            $p_details = stripslashes($row->product_details);
+            $commission = ($row->commission / 100); 
+            $total_commission = ($commission * $row->amount);
+            $order_amount = number_format(($total_commission + $row->amount), 2);
+
+            $list[] = array(
+                'count' => $count++,
+                'product_id' => $this->is_app->encrypt($row->product_id),
+                'description' => $p_details,
+                'percentage' => $commission,
+                'quantity' => "{$addition}<span>1</span>{$subraction}",
+                'order_amount' => $order_amount,
+                'delivery_amount' => $row->amount,
+                'remove' => $remove
+            );
+            
+            $product[] = array(
+                'product_id' => $row->product_id,
+                'quantity' => 1,
+                'commission' => $commission,
+                'amount' => $row->amount,
+                'order_amount' => $order_amount,
+                'delivery_amount' => $row->amount
+            );
+        }
+
+        $this->session->set_userdata('product_on_cart', $product, 180); // Expire in 3 minutes
+
+        return $list;
     }
 }

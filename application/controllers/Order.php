@@ -21,18 +21,5 @@
 			$this->load->view('order/index')
 					   ->view('layout/footer');
 		}
-
-		public function get_order_on_cart()
-		{
-			$this->is_app->ajax_method_required();
-			
-			$row = $this->is_app->user_session_required();
-
-			if($row->status) 
-			{
-				$data['result'] = $this->product->get_product_where_in($this->input->post('unique_id'));
-				
-				$this->load->view('product/form/product_on_cart', $data);
-			}
-		}
+		
 	}

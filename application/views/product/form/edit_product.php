@@ -77,7 +77,6 @@
 
 <?=form_close()?>
 
-<?=script_tag("assets/jquery.mask.js")?>
 <?=script_tag("assets/product/index.js")?>
 <?=script_tag('assets/toast/index.js')?>
 <?=script_tag('assets/jquery-confirm/index.js')?>
